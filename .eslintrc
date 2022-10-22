@@ -34,6 +34,7 @@
         "endOfLine": "auto"
       }
     ],
+    "no-console": "off",
     "max-len": [
       "error",
       {

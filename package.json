@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "dev": "vite --host",
+    "dev:port": "adb reverse tcp:3000 tcp:3000",
     "serve": "vite preview",
     "build": "run-s build:esm build:cjs",
     "prebuild": "shx rm -rf build",
