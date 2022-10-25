@@ -2,7 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { VRButton, XR, Controllers, Hands } from '@react-three/xr';
 import React from 'react';
 
-import { OculusTouchController } from './controllers/OculusTouch';
+import { OculusTouchController } from './controllers/OculusTouchController';
 
 const StageContent = () => {
   return (
@@ -10,7 +10,7 @@ const StageContent = () => {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
 
-      <OculusTouchController />
+      <OculusTouchController debug />
     </>
   );
 };

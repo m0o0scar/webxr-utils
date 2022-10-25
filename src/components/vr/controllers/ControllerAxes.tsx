@@ -14,6 +14,8 @@ export interface ControllerAxesProps {
   onRight?: () => void;
   onUp?: () => void;
   onDown?: () => void;
+  label?: string;
+  debug?: boolean;
 }
 
 export const ControllerAxes: FC<ControllerAxesProps> = ({
@@ -25,8 +27,13 @@ export const ControllerAxes: FC<ControllerAxesProps> = ({
   onRight,
   onUp,
   onDown,
+  label,
+  debug,
 }) => {
   const previousValue = useRef(new Vector2(0, 0));
+
+  const name =
+    label || `${controller?.inputSource.handedness || 'unknown'} controller axes [${xAxesIndex}, #${yAxesIndex}]`;
 
   useFrame(() => {
     const x = controller?.inputSource.gamepad?.axes[xAxesIndex];
@@ -35,12 +42,27 @@ export const ControllerAxes: FC<ControllerAxesProps> = ({
 
     const { x: previousX, y: previousY } = previousValue.current;
 
-    if (previousX < threshold && x >= threshold) onRight?.();
-    else if (previousX > -threshold && x <= -threshold) onLeft?.();
-    if (previousY < threshold && y >= threshold) onDown?.();
-    else if (previousY > -threshold && y <= -threshold) onUp?.();
+    // x axes
+    if (previousX < threshold && x >= threshold) {
+      if (debug) console.log(`[${name}] right`);
+      onRight?.();
+    } else if (previousX > -threshold && x <= -threshold) {
+      if (debug) console.log(`[${name}] left`);
+      onLeft?.();
+    }
 
+    // y axes
+    if (previousY < threshold && y >= threshold) {
+      if (debug) console.log(`[${name}] down`);
+      onDown?.();
+    } else if (previousY > -threshold && y <= -threshold) {
+      if (debug) console.log(`[${name}] up`);
+      onUp?.();
+    }
+
+    // value changed
     if (x !== previousX || y !== previousY) {
+      if (debug) console.log(`[${name}] changed to [${x.toFixed(4)}, ${y.toFixed(4)}]`);
       previousValue.current.set(x, y);
       onChanged?.(new Vector2(x, y));
     }
