@@ -1,5 +1,5 @@
 import { useController } from '@react-three/xr';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
 import { Vector2 } from 'three';
 
 import { ControllerAxes } from './ControllerAxes';

@@ -1,1 +1,1 @@
-export const hello = 'world';
+export { OculusTouchController } from './components/vr/controllers/OculusTouchController';
