@@ -1,3 +1,0 @@
-[submodule "src/webxr-input-profiles"]
-	path = src/webxr-input-profiles
-	url = https://github.com/immersive-web/webxr-input-profiles.git
